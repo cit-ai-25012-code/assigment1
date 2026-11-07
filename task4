@@ -1,0 +1,38 @@
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+int main() {
+    int n;
+    cout << "Enter number of students: ";
+    cin >> n;
+
+    if (n <= 0) return 0;
+
+    int* grades = new int[n];
+    int sum = 0;
+
+    for (int i = 0; i < n; i++) {
+        cout << "Enter mark for student " << i + 1 << ": ";
+        cin >> grades[i];
+        sum += grades[i];
+    }
+
+    int maxGrade = grades[0];
+    int minGrade = grades[0];
+
+    for (int i = 1; i < n; i++) {
+        if (grades[i] > maxGrade) maxGrade = grades[i];
+        if (grades[i] < minGrade) minGrade = grades[i];
+    }
+
+    double average = static_cast<double>(sum) / n;
+
+    cout << "\n--- Class Statistics ---" << endl;
+    cout << "Average Grade: " << fixed << setprecision(2) << average << endl;
+    cout << "Highest Grade: " << maxGrade << endl;
+    cout << "Lowest Grade:  " << minGrade << endl;
+
+    delete[] grades;
+    return 0;
+}
