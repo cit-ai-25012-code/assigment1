@@ -1,0 +1,45 @@
+#include <iostream>
+using namespace std;
+
+int* resizeArray(int inArray[], const int size) {
+    // تخصيص مصفوفة جديدة بحجم مضاعف
+    int* newArray = new int[size * 2];
+    
+    // نسخ العناصر الأصلية في النصف الأول
+    for (int i = 0; i < size; i++) {
+        newArray[i] = inArray[i];
+    }
+    
+    // وضع ضعف القيم في النصف الثاني
+    for (int i = 0; i < size; i++) {
+        newArray[size + i] = inArray[i] * 2;
+    }
+    
+    return newArray;
+}
+
+int main() {
+    int size;
+    cout << "Enter size of the array: ";
+    cin >> size;
+
+    int* arr = new int[size];
+    cout << "Enter elements of array: ";
+    for (int i = 0; i < size; i++) {
+        cin >> arr[i];
+    }
+
+    int* resized = resizeArray(arr, size);
+
+    cout << "Resized array: ";
+    for (int i = 0; i < size * 2; i++) {
+        cout << resized[i] << (i == size * 2 - 1 ? "" : ", ");
+    }
+    cout << endl;
+
+    // تحرير الذاكرة
+    delete[] arr;
+    delete[] resized;
+
+    return 0;
+}
